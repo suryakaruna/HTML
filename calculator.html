@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+    <style>
+    body{
+    margin:0;
+    padding:0;
+}
+main{
+    width:70vw;
+    margin:auto;
+}
+textarea{
+      width: inherit; 
+    font-size:2rem;
+    text-align: center;
+    line-height:1.5em;
+    max-height:150px;
+    padding-top:50px;
+    font-weight:600;
+}
+
+div{
+display: grid;
+grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.btn{
+    border: 1px solid black;
+    text-align: right;
+    padding: 20px 20px;
+    font-weight:400;
+    font-size:2rem;
+}
+.btn:hover{
+    box-shadow:inset 1px 1px 9px 5px #ccc;
+    cursor: pointer;
+}
+input{
+    width:inherit;
+    height:30px;
+    text-align: center;
+    line-height:1.5em;
+}
+    </style>
+</head>
+<body>
+    <main>
+        <br><br>
+    <textarea name="" id="inp" cols="30" rows="10"></textarea>
+    <input type="text" id='lef'>
+    <div>
+        <div class="btn" onclick="add('1')">1</div>
+        <div class="btn" onclick="add('2')">2</div>
+        <div class="btn" onclick="add('3')">3</div>
+        <div class="btn" onclick="add('+')">+</div>
+        <div class="btn" onclick="add('4')">4</div>
+        <div class="btn" onclick="add('5')">5</div>
+        <div class="btn" onclick="add('6')">6</div>
+        <div class="btn" onclick="add('-')">-</div>
+        <div class="btn" onclick="add('7')">7</div>
+        <div class="btn" onclick="add('8')">8</div>
+        <div class="btn" onclick="add('9')">9</div>
+        <div class="btn" onclick="add('*')">*</div>
+        <div class="btn" onclick="add('c')">C</div>
+        <div class="btn" onclick="add('0')">0</div>
+        <div class="btn" onclick="add('=')">=</div>
+        <div class="btn" onclick="add('/')">/</div>
+        
+        
+        
+    </div>
+</main>
+    <script>
+        
+    left=0;
+        op="";
+    function add(e){
+        e=e.trim();
+        var content=document.getElementById('inp');
+         temp=document.getElementById('lef');
+        if(e==='c')
+        content.value="";
+        else if(e==='+' || e==='-' || e==='*'  || e==='/' ){
+            left=parseInt(content.value.trim());
+            temp.value=left;
+            content.value="";
+            op=e;
+        }else if(e==='=' && op!=null){
+            temp.value="";
+            if(content.value==null){
+                content.value="Invalid Operation";
+            }
+            switch(op){
+                case '+':content.value=parseInt(left)+parseInt(content.value.trim()); 
+                                  break;
+                case '-':content.value=parseInt(left)-parseInt(content.value.trim()); break;
+                case '*':content.value=parseInt(left)*parseInt(content.value.trim()); break;
+                case '/':
+                    if(parseInt(content.value.trim())==0)
+                    content.value="Invalid Input 0";    
+                    else 
+                    content.value=parseInt(left)/parseInt(content.value.trim());
+                     break;    
+                default:content.value=parseInt(left);
+            }
+           op="";
+          
+        }
+        else{
+            content.value+=e;
+        }
+    }
+    </script>
+    
+</body>
+</html>
